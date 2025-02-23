@@ -1,22 +1,25 @@
 import Header from '../components/Header';
-import Globe from '../components/Globe';
-import PropertyCard from '../components/PropertyCard';
-
-const properties = [
-  { id: '123-solar', name: '123 Solar St, Austin, USA', value: 50000, sharePrice: 12500, shares: '2/4', img: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg' },
-  { id: '456-caribe', name: '456 Caribe St, SantaMarta, COLOMBIA', value: 100000, sharePrice: 20000, shares: '1/5', img: 'https://images.pexels.com/photos/1559699/pexels-photo-1559699.jpeg' },
-];
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-navy">
+    <div className="min-h-screen bg-white text-navy font-body">
       <Header />
-      <div className="relative h-[40vh] sm:h-[60vh]">
-        <Globe />
-        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl sm:text-5xl font-bold shadow-lg text-center">Caribbean Investments</h1>
+      <div className="relative h-[40vh] sm:h-[60vh] bg-navy flex items-center justify-center text-center">
+        <div>
+          <h1 className="text-3xl sm:text-5xl font-display font-bold text-white mb-4">Caribbean Investments</h1>
+          <p className="text-warmGray text-lg sm:text-xl max-w-2xl mx-auto">Own a slice of paradise with Casaamigo—fractional real estate, powered by innovation.</p>
+        </div>
       </div>
-      <div className="container mx-auto p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {properties.map(prop => <PropertyCard key={prop.id} {...prop} />)}
+      <div className="container mx-auto p-5 text-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+          <Link href="/login">
+            <button className="bg-teal text-white px-6 py-3 rounded text-lg font-display w-full sm:w-auto">Login</button>
+          </Link>
+          <Link href="/properties">
+            <button className="bg-ochre text-navy px-6 py-3 rounded text-lg font-display w-full sm:w-auto">Check Properties</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

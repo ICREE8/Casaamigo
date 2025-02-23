@@ -1,17 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-white text-navy min-h-screen;
+  @apply bg-white text-navy min-h-screen font-body;
 }
 
-/* Responsive container */
 .container {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
-/* Responsive header */
 header {
   @apply flex-col sm:flex-row;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-display {
+  font-family: 'Montserrat', sans-serif;
 }
