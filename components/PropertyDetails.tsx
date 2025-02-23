@@ -18,13 +18,19 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ name, value, sharePri
       <h2 className="text-2xl font-bold mb-2 font-display">{name}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-body">
         <div>
-          <p className="text-warmGray">Total Value: <span className="text-teal">${value.toLocaleString()}</span></p>
-          <p className="text-warmGray">Share Price: <span className="text-teal">${sharePrice.toLocaleString()}</span></p>
-          <p className="text-warmGray">Shares Available: <span className="text-warmGray">{shares}</span></p>
-          <p className="text-warmGray">Your Shares: <span className="text-warmGray">{shares.split('/')[0]}/{shares.split('/')[1]} ({(parseInt(shares.split('/')[0]) / parseInt(shares.split('/')[1]) * 100).toFixed(0)}%)</span></p>
+          <p className="text-warmGray text-lg">Total Value: <span className="text-teal text-2xl font-bold">${value.toLocaleString()}</span></p>
         </div>
         <div>
+          <p className="text-warmGray text-lg">Share Price: <span className="text-teal text-2xl font-bold">${sharePrice.toLocaleString()}</span></p>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-body">
+        <div>
+          <p className="text-warmGray">Shares Available: <span className="text-teal">{shares}</span></p>
+          <p className="text-warmGray">Your Shares: <span className="text-teal">{shares.split('/')[0]}/{shares.split('/')[1]} ({(parseInt(shares.split('/')[0]) / parseInt(shares.split('/')[1]) * 100).toFixed(0)}%)</span></p>
           <p className="text-warmGray">Monthly Income: <span className="text-teal">${monthlyIncome.toLocaleString()}</span></p>
+        </div>
+        <div>
           <p className="text-warmGray">Monthly Expenses: <span className="text-charcoal">${monthlyExpenses.toLocaleString()}</span></p>
           <p className="text-warmGray">Net Monthly: <span className="text-teal">${(monthlyIncome - monthlyExpenses).toLocaleString()}</span></p>
           <p className="text-warmGray">Est. ROI: <span className="text-teal">{(((monthlyIncome - monthlyExpenses) * 12) / value * 100).toFixed(1)}%</span></p>
@@ -37,7 +43,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ name, value, sharePri
       <div className="flex flex-col sm:flex-row gap-4 mt-4">
         <button className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto">Pay with USD</button>
         <button className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto">Connect Wallet</button>
-        <button className="bg-ochre text-navy px-6 py-2 rounded font-bold w-full sm:w-auto font-display">Invest</button>
+        <button className="bg-ochre text-white px-6 py-2 rounded font-bold w-full sm:w-auto font-display">Invest</button>
       </div>
       <Link href="/">
         <button className="mt-4 bg-teal text-white px-6 py-2 rounded w-full sm:w-auto">Back to Properties</button>
