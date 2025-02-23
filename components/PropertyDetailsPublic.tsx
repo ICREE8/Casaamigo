@@ -10,9 +10,14 @@ interface PropertyDetailsProps {
   sharePrice: number;
   monthlyIncome: number;
   monthlyExpenses: number;
+  city: string;
+  country: string;
+  bedrooms: number;
+  bathrooms: number;
+  pool: boolean;
 }
 
-const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, shares, img, sharePrice, monthlyIncome, monthlyExpenses }) => {
+const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, shares, img, sharePrice, monthlyIncome, monthlyExpenses, city, country, bedrooms, bathrooms, pool }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const galleryImages = [
     img,
@@ -45,21 +50,30 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
         </button>
       </div>
       <h2 className="text-2xl font-bold mb-2 font-display">{name}</h2>
+      <p className="text-warmGray text-base mb-2">{city}, {country}</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-body">
         <div className="flex flex-col">
-          <p className="text-warmGray text-lg">Home Value: <span className="text-white text-lg font-bold">${value.toLocaleString()}</span></p>
-          <p className="text-warmGray text-lg">Shares Available: <span className="text-teal text-lg">${shares}</span></p>
+          <p className="text-warmGray text-lg">Bedrooms: <span className="text-teal text-lg">{bedrooms}</span></p>
+          <p className="text-warmGray text-lg">Bathrooms: <span className="text-teal text-lg">{bathrooms}</span></p>
+          <p className="text-warmGray text-lg">Pool: <span className="text-teal text-lg">{pool ? 'Yes' : 'No'}</span></p>
           <p className="text-warmGray text-lg">Monthly Income: <span className="text-teal text-lg">${monthlyIncome.toLocaleString()}</span></p>
         </div>
         <div className="flex flex-col">
-          <p className="text-warmGray text-lg">Share Price: <span className="text-teal text-lg font-bold">${sharePrice.toLocaleString()}</span></p>
-          <p className="text-warmGray text-lg">Monthly Expenses: <span className="text-charcoal text-lg">${monthlyExpenses.toLocaleString()}</span></p>
+          <p className="text-warmGray text-lg">Home Value: <span className="text-white text-lg font-bold">${value.toLocaleString()}</span></p>
+          <p className="text-warmGray text-lg">Share Price: <span className="text-ochre text-lg">${sharePrice.toLocaleString()}</span></p>
+          <p className="text-warmGray text-lg">Monthly Expenses: <span className="text-white text-lg">${monthlyExpenses.toLocaleString()}</span></p>
           <p className="text-warmGray text-lg">Net Monthly: <span className="text-ochre text-lg">${(monthlyIncome - monthlyExpenses).toLocaleString()}</span></p>
+          <p className="text-warmGray text-lg">Shares Available: <span className="text-white text-lg">{shares}</span></p>
         </div>
       </div>
-      <Link href="/properties">
-        <button className="mt-4 bg-teal text-white px-6 py-2 rounded w-full sm:w-auto">Back to Properties</button>
-      </Link>
+      <div className="flex flex-col sm:flex-row gap-4 mt-4">
+        <Link href="/">
+          <button className="bg-ochre text-white px-6 py-2 rounded w-full sm:w-auto">Return Home</button>
+        </Link>
+        <Link href="/properties">
+          <button className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto">Back to Properties</button>
+        </Link>
+      </div>
     </div>
   );
 };

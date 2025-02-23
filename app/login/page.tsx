@@ -1,10 +1,9 @@
 'use client';
-import { useContext, useState, useEffect } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import Link from 'next/link';
 
-const Header: React.FC = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+export default function Login() {
   const [account, setAccount] = useState<string | null>(null);
 
   useEffect(() => {
@@ -36,19 +35,21 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full bg-navy text-white p-4 flex justify-between items-center z-10 flex-col sm:flex-row">
-      <div className="text-xl font-bold mb-2 sm:mb-0">
-        <span className="text-ochre">Vacation</span>Homes
+    <div className="min-h-screen bg-white text-navy font-body flex items-center justify-center p-5">
+      <div className="bg-navy text-white p-6 rounded-lg max-w-md w-full font-sans">
+        <h1 className="text-3xl font-display font-bold text-center mb-6">Login to Casaamigo</h1>
+        <div className="flex flex-col gap-4">
+          <button 
+            onClick={connectWallet} 
+            className="bg-teal text-white px-6 py-3 rounded text-lg font-display hover:bg-ochre"
+          >
+            {account ? `${account.slice(0, 6)}...${account.slice(-4)}` : 'Connect Wallet'}
+          </button>
+        </div>
+        <Link href="/" className="block text-center mt-4">
+          <button className="bg-ochre text-white px-6 py-2 rounded w-full">Return Home</button>
+        </Link>
       </div>
-      <div className="flex flex-col sm:flex-row gap-2">
-        <button onClick={toggleTheme} className="px-4 py-2 bg-teal text-white rounded hover:bg-ochre w-full sm:w-auto">
-          {theme === 'light' ? 'Dark' : 'Light'} Mode
-        </button>
-        <button onClick={connectWallet} className="px-4 py-2 bg-teal text-white rounded hover:bg-ochre w-full sm:w-auto">
-          {account ? `${account.slice(0, 6)}...${account.slice(-4)}` : 'Connect Wallet'}
-        </button>
-      </div>
-    </header>
+    </div>
   );
-};
-export default Header;
+}

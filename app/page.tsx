@@ -7,7 +7,7 @@ export default function Home() {
       <Header />
       <div className="relative h-[40vh] sm:h-[60vh] bg-navy flex items-center justify-center text-center">
         <div>
-          <h1 className="text-3xl sm:text-5xl font-display font-bold text-white mb-4">Arenas Investments</h1>
+          <h1 className="text-3xl sm:text-5xl font-display font-bold text-white mb-4">Caribbean Investments</h1>
           <p className="text-warmGray text-lg sm:text-xl max-w-2xl mx-auto">Own a slice of paradise with Casaamigo—fractional real estate, powered by innovation.</p>
         </div>
       </div>
@@ -17,7 +17,7 @@ export default function Home() {
             <button className="bg-teal text-white px-6 py-3 rounded text-lg font-display w-full sm:w-auto">Login</button>
           </Link>
           <Link href="/properties">
-            <button className="bg-ochre text-navy px-6 py-3 rounded text-lg font-display w-full sm:w-auto">Check Properties</button>
+            <button className="bg-ochre text-white px-6 py-3 rounded text-lg font-display w-full sm:w-auto">Check Properties</button>
           </Link>
         </div>
       </div>
