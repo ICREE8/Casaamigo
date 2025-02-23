@@ -6,8 +6,24 @@ import PropertyDetails from '../../../components/PropertyDetails';
 import { ThemeContext } from '../../../context/ThemeContext';
 
 const properties = {
-  '123-solar': { name: '123 Solar St, Austin, USA', value: 50000, sharePrice: 12500, shares: '2/4', img: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg' },
-  '456-caribe': { name: '456 Caribe St, SantaMarta, COLOMBIA', value: 100000, sharePrice: 20000, shares: '1/5', img: 'https://images.pexels.com/photos/1559699/pexels-photo-1559699.jpeg' },
+  '123-solar': { 
+    name: '123 Solar St, Austin, USA', 
+    value: 50000, 
+    sharePrice: 12500, 
+    shares: '2/4', 
+    img: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg',
+    monthlyIncome: 1200, 
+    monthlyExpenses: 400 
+  },
+  '456-caribe': { 
+    name: '456 Caribe St, SantaMarta, COLOMBIA', 
+    value: 100000, 
+    sharePrice: 20000, 
+    shares: '1/5', 
+    img: 'https://images.pexels.com/photos/1559699/pexels-photo-1559699.jpeg',
+    monthlyIncome: 2500, 
+    monthlyExpenses: 800 
+  },
 };
 
 export default function PropertyPage() {

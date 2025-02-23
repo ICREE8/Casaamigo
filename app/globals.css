@@ -3,5 +3,15 @@
 @tailwind utilities;
 
 body {
-  @apply bg-white text-navy;
+  @apply bg-white text-navy min-h-screen;
+}
+
+/* Responsive container */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Responsive header */
+header {
+  @apply flex-col sm:flex-row;
 }

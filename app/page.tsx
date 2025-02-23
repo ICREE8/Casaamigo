@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-navy">
       <Header />
-      <div className="relative h-[60vh]">
+      <div className="relative h-[40vh] sm:h-[60vh]">
         <Globe />
-        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-5xl font-bold shadow-lg">Caribbean Investments</h1>
+        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl sm:text-5xl font-bold shadow-lg text-center">Caribbean Investments</h1>
       </div>
-      <div className="container mx-auto p-5 flex flex-wrap gap-5 justify-center">
+      <div className="container mx-auto p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {properties.map(prop => <PropertyCard key={prop.id} {...prop} />)}
       </div>
     </div>
