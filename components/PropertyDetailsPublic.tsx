@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ethers } from 'ethers';
 
 interface PropertyDetailsProps {
   name: string;
@@ -18,15 +19,57 @@ interface PropertyDetailsProps {
 }
 
 const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, shares, img, sharePrice, monthlyIncome, monthlyExpenses, city, country, bedrooms, bathrooms, pool }) => {
+  const [localShares, setLocalShares] = useState(shares);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [address, setAddress] = useState<string | null>(null);
   const galleryImages = [
     img,
     'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
     'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg',
   ];
 
+  useEffect(() => {
+    const checkWallet = async () => {
+      if (!window.ethereum) {
+        console.log('No MetaMask detected');
+        return;
+      }
+
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const accounts = await provider.listAccounts();
+        if (accounts.length > 0) {
+          console.log('Property Page Address:', accounts[0]); // Debug log
+          setAddress(accounts[0]);
+        }
+      } catch (error) {
+        console.error('Wallet check failed:', error);
+      }
+    };
+    checkWallet();
+  }, []);
+
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+
+  const buyShare = async () => {
+    if (!window.ethereum) {
+      alert('Please connect your wallet in the login page!');
+      return;
+    }
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const message = `I want to buy a share of ${name} for free (test mode)`;
+      const signature = await signer.signMessage(message);
+      alert(`Share purchase signed! Signature: ${signature}`);
+      const [owned, total] = localShares.split('/').map(Number);
+      setLocalShares(`${owned + 1}/${total}`); // Mock increment
+    } catch (error) {
+      console.error('Sign failed:', error);
+      alert('Failed to sign—check MetaMask!');
+    }
+  };
 
   return (
     <div className="bg-navy text-white p-6 rounded-lg max-w-2xl mx-auto w-full font-sans">
@@ -63,8 +106,19 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
           <p className="text-warmGray text-lg">Share Price: <span className="text-ochre text-lg">${sharePrice.toLocaleString()}</span></p>
           <p className="text-warmGray text-lg">Monthly Expenses: <span className="text-white text-lg">${monthlyExpenses.toLocaleString()}</span></p>
           <p className="text-warmGray text-lg">Net Monthly: <span className="text-ochre text-lg">${(monthlyIncome - monthlyExpenses).toLocaleString()}</span></p>
-          <p className="text-warmGray text-lg">Shares Available: <span className="text-white text-lg">{shares}</span></p>
-        </div>
+          <p className="text-warmGray text-lg">Shares Available: <span className="text-white text-lg">{localShares}</span></p>        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row gap-4 mt-4">
+        {address ? (
+          <>
+            <button className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto">Pay with USD</button>
+            <button onClick={buyShare} className="bg-ochre text-white px-6 py-2 rounded font-bold w-full sm:w-auto font-display">Buy Share (Sign Tx)</button>
+          </>
+        ) : (
+          <Link href="/login">
+            <button className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto">Login to Invest</button>
+          </Link>
+        )}
       </div>
       <div className="flex flex-col sm:flex-row gap-4 mt-4">
         <Link href="/">
