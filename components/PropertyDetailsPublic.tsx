@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import { useRouter } from 'next/navigation';
 
 interface PropertyDetailsProps {
   name: string;
@@ -16,12 +17,14 @@ interface PropertyDetailsProps {
   bedrooms: number;
   bathrooms: number;
   pool: boolean;
+  id: string; // Add id for redirect
 }
 
-const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, shares, img, sharePrice, monthlyIncome, monthlyExpenses, city, country, bedrooms, bathrooms, pool }) => {
-  const [localShares, setLocalShares] = useState(shares);
+const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, shares, img, sharePrice, monthlyIncome, monthlyExpenses, city, country, bedrooms, bathrooms, pool, id }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [address, setAddress] = useState<string | null>(null);
+  const [localShares, setLocalShares] = useState(shares);
+  const router = useRouter();
   const galleryImages = [
     img,
     'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
@@ -34,12 +37,11 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
         console.log('No MetaMask detected');
         return;
       }
-
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const accounts = await provider.listAccounts();
         if (accounts.length > 0) {
-          console.log('Property Page Address:', accounts[0]); // Debug log
+          console.log('Property Page Address:', accounts[0]);
           setAddress(accounts[0]);
         }
       } catch (error) {
@@ -64,7 +66,8 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
       const signature = await signer.signMessage(message);
       alert(`Share purchase signed! Signature: ${signature}`);
       const [owned, total] = localShares.split('/').map(Number);
-      setLocalShares(`${owned + 1}/${total}`); // Mock increment
+      setLocalShares(`${owned + 1}/${total}`);
+      router.push(`/property/owner/${id}`); // Redirect to owner dashboard
     } catch (error) {
       console.error('Sign failed:', error);
       alert('Failed to sign—check MetaMask!');
@@ -96,9 +99,9 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
       <p className="text-warmGray text-base mb-2">{city}, {country}</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-body">
         <div className="flex flex-col">
-          <p className="text-warmGray text-lg">Bedrooms: <span className="text-teal text-lg">{bedrooms}</span></p>
-          <p className="text-warmGray text-lg">Bathrooms: <span className="text-teal text-lg">{bathrooms}</span></p>
-          <p className="text-warmGray text-lg">Pool: <span className="text-teal text-lg">{pool ? 'Yes' : 'No'}</span></p>
+          <p className="text-warmGray text-lg">🛏️ Bedrooms: <span className="text-teal text-lg">{bedrooms}</span></p>
+          <p className="text-warmGray text-lg">🛁 Bathrooms: <span className="text-teal text-lg">{bathrooms}</span></p>
+          <p className="text-warmGray text-lg">🏊 Pool: <span className="text-teal text-lg">{pool ? 'Yes' : 'No'}</span></p>
           <p className="text-warmGray text-lg">Monthly Income: <span className="text-teal text-lg">${monthlyIncome.toLocaleString()}</span></p>
         </div>
         <div className="flex flex-col">
@@ -106,7 +109,8 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
           <p className="text-warmGray text-lg">Share Price: <span className="text-ochre text-lg">${sharePrice.toLocaleString()}</span></p>
           <p className="text-warmGray text-lg">Monthly Expenses: <span className="text-white text-lg">${monthlyExpenses.toLocaleString()}</span></p>
           <p className="text-warmGray text-lg">Net Monthly: <span className="text-ochre text-lg">${(monthlyIncome - monthlyExpenses).toLocaleString()}</span></p>
-          <p className="text-warmGray text-lg">Shares Available: <span className="text-white text-lg">{localShares}</span></p>        </div>
+          <p className="text-warmGray text-lg">Shares Available: <span className="text-white text-lg">{localShares}</span></p>
+        </div>
       </div>
       <div className="flex flex-col sm:flex-row gap-4 mt-4">
         {address ? (

@@ -21,7 +21,7 @@ const properties = [
     monthlyIncome: 1200,
     monthlyExpenses: 400,
     owners: ['vitalik.eth', 'elonmusk.eth', '0x8bDb4D532736ff2092B6b1789354f515ec0Ac650'],
-    propertyTaxes: 1500, // Annual USD
+    propertyTaxes: 1500,
     zipcode: '78701',
     squareMeters: 150,
     yearBuilt: 2015,
@@ -43,7 +43,7 @@ const properties = [
     monthlyIncome: 2500,
     monthlyExpenses: 800,
     owners: ['satoshi.eth', '0x8bDb4D532736ff2092B6b1789354f515ec0Ac650'],
-    propertyTaxes: 2000, // Annual USD
+    propertyTaxes: 2000,
     zipcode: '470001',
     squareMeters: 200,
     yearBuilt: 2018,
@@ -56,6 +56,7 @@ export default function OwnerPropertyDashboard() {
   const { id } = useParams();
   const [address, setAddress] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [proposal, setProposal] = useState('');
   const property = properties.find(prop => prop.id === id);
 
   useEffect(() => {
@@ -98,6 +99,20 @@ export default function OwnerPropertyDashboard() {
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % property.img.length);
   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + property.img.length) % property.img.length);
 
+  const mockProposals = [
+    { id: 1, text: 'Add a Rooftop Deck', votes: { 'vitalik.eth': 'Yes', 'elonmusk.eth': 'No', [address]: null } },
+    { id: 2, text: 'Upgrade Kitchen Appliances', votes: { 'vitalik.eth': 'Yes', 'elonmusk.eth': 'Yes', [address]: null } },
+  ];
+
+  const submitProposal = () => {
+    if (proposal.trim()) {
+      alert(`Proposal Submitted: "${proposal}" - Voting mock pending!`);
+      setProposal('');
+    } else {
+      alert('Please enter a proposal!');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white text-navy font-body">
       <Header />
@@ -112,18 +127,14 @@ export default function OwnerPropertyDashboard() {
               alt={property.name} 
               className="w-full h-64 object-cover rounded-lg mb-4 opacity-90 border-2 border-warmGray"
             />
-            {/* Uncomment for carousel if multi-image support added
-            <button onClick={prevImage} className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-teal text-white p-2 rounded-full hover:bg-ochre">←</button>
-            <button onClick={nextImage} className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-teal text-white p-2 rounded-full hover:bg-ochre">→</button>
-            */}
           </div>
           <h2 className="text-2xl font-bold mb-2 font-display">{property.name}</h2>
           <p className="text-ochre text-base mb-2">{property.city}, {property.country}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-body">
             <div className="flex flex-col">
-              <p className="text-warmGray text-lg">Bedrooms: <span className="text-teal text-lg">{property.bedrooms}</span></p>
-              <p className="text-warmGray text-lg">Bathrooms: <span className="text-teal text-lg">{property.bathrooms}</span></p>
-              <p className="text-warmGray text-lg">Pool: <span className="text-teal text-lg">{property.pool ? 'Yes' : 'No'}</span></p>
+              <p className="text-warmGray text-lg">🛏️ Bedrooms: <span className="text-teal text-lg">{property.bedrooms}</span></p>
+              <p className="text-warmGray text-lg">🛁 Bathrooms: <span className="text-teal text-lg">{property.bathrooms}</span></p>
+              <p className="text-warmGray text-lg">🏊 Pool: <span className="text-teal text-lg">{property.pool ? 'Yes' : 'No'}</span></p>
               <p className="text-warmGray text-lg">Monthly Income: <span className="text-teal text-lg">${property.monthlyIncome.toLocaleString()}</span></p>
               <p className="text-warmGray text-lg">Square Meters: <span className="text-teal text-lg">{property.squareMeters} m²</span></p>
               <p className="text-warmGray text-lg">Year Built: <span className="text-teal text-lg">{property.yearBuilt}</span></p>
@@ -139,7 +150,7 @@ export default function OwnerPropertyDashboard() {
             </div>
           </div>
           <div className="mb-4">
-            <h3 className="text-xl font-bold mb-2 font-display">Owners</h3>
+            <h3 className="text-xl font-bold mb-2 font-display">👥 Owners</h3>
             <ul className="list-disc pl-5 text-warmGray">
               {property.owners.map((owner, index) => (
                 <li key={index} className="text-teal">{owner}</li>
@@ -151,15 +162,32 @@ export default function OwnerPropertyDashboard() {
             <p className="text-warmGray text-lg">Listing Date: <span className="text-teal">{property.listingDate}</span></p>
             <p className="text-warmGray text-lg">Last Renovation: <span className="text-teal">{property.lastRenovation}</span></p>
           </div>
+          <div className="mb-4">
+            <h3 className="text-xl font-bold mb-2 font-display">Proposed Updates</h3>
+            {mockProposals.length > 0 ? (
+              <ul className="list-disc pl-5 text-warmGray">
+                {mockProposals.map(proposal => (
+                  <li key={proposal.id}>
+                    {proposal.text} - Votes: 
+                    <span className="text-teal"> Vitalik: {proposal.votes['vitalik.eth']}, Elon: {proposal.votes['elonmusk.eth'] || 'N/A'}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-warmGray">No proposals yet.</p>
+            )}
+          </div>
           <div className="mt-6">
             <h3 className="text-xl font-bold mb-2 font-display">Propose an Update or Remodel</h3>
             <p className="text-warmGray mb-2">Have an idea to improve {property.name}? Suggest it below to vote with other owners!</p>
             <textarea
               className="w-full p-2 border border-teal rounded-lg text-navy bg-white focus:outline-none focus:border-ochre"
               rows={4}
+              value={proposal}
+              onChange={(e) => setProposal(e.target.value)}
               placeholder="E.g., Add a rooftop deck, upgrade kitchen appliances..."
             />
-            <button className="mt-2 bg-ochre text-white px-6 py-2 rounded font-bold w-full sm:w-auto font-display">Submit for Voting</button>
+            <button onClick={submitProposal} className="mt-2 bg-ochre text-white px-6 py-2 rounded font-bold w-full sm:w-auto font-display">Submit for Voting</button>
           </div>
         </div>
       </div>

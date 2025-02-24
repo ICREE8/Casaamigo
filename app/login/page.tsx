@@ -7,24 +7,26 @@ import { ethers } from 'ethers';
 export default function Login() {
   const router = useRouter();
   const [address, setAddress] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const connectWallet = async () => {
     if (!window.ethereum) {
-      alert('Please install MetaMask!');
+      setError('Please install MetaMask!');
       return;
     }
 
     try {
+      setError(null);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send('eth_requestAccounts', []); // Connect MetaMask
+      await provider.send('eth_requestAccounts', []);
       const signer = provider.getSigner();
       const walletAddress = await signer.getAddress();
-      console.log('Connected Wallet:', walletAddress); // Debug log
+      console.log('Connected Wallet:', walletAddress);
       setAddress(walletAddress);
-      router.push('/dashboard'); // Redirect
+      router.push('/dashboard');
     } catch (error) {
       console.error('Wallet connect failed:', error);
-      alert('Failed to connect—check MetaMask!');
+      setError('Failed to connect—check MetaMask and try again!');
     }
   };
 
@@ -39,6 +41,17 @@ export default function Login() {
           >
             {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Connect Wallet'}
           </button>
+          {error && (
+            <div className="text-center text-red-500 mb-4">
+              <p>{error}</p>
+              <button
+                onClick={connectWallet}
+                className="mt-2 bg-ochre text-white px-4 py-1 rounded text-sm hover:bg-teal"
+              >
+                Retry
+              </button>
+            </div>
+          )}
         </div>
         <Link href="/" className="block text-center mt-4">
           <button className="bg-ochre text-white px-6 py-2 rounded w-full">Return Home</button>

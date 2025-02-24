@@ -11,11 +11,12 @@ const properties = [
 
 export default function Dashboard() {
   const [address, setAddress] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const checkWallet = async () => {
       if (!window.ethereum) {
-        console.log('No MetaMask detected');
+        setError('No MetaMask detected—please install!');
         return;
       }
       try {
@@ -24,19 +25,28 @@ export default function Dashboard() {
         if (accounts.length > 0) {
           console.log('Dashboard Wallet Address:', accounts[0]);
           setAddress(accounts[0]);
+        } else {
+          console.log('No accounts connected');
         }
       } catch (error) {
         console.error('Wallet check failed:', error);
+        setError('Failed to load wallet—check MetaMask!');
       }
     };
     checkWallet();
   }, []);
+
+  const disconnectWallet = () => {
+    setAddress(null);
+    setError(null);
+  };
 
   if (!address) {
     return (
       <div className="min-h-screen bg-white text-navy font-body flex items-center justify-center p-5">
         <div className="bg-navy text-white p-6 rounded-lg max-w-md w-full font-sans text-center">
           <h1 className="text-3xl font-display font-bold mb-4">Please Connect Wallet</h1>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <Link href="/login">
             <button className="bg-teal text-white px-6 py-2 rounded w-full">Go to Login</button>
           </Link>
@@ -56,7 +66,7 @@ export default function Dashboard() {
         <Link href="/" className="block text-center mb-4">
           <button className="bg-ochre text-white px-6 py-2 rounded w-full sm:w-auto">Return Home</button>
         </Link>
-        <button onClick={() => setAddress(null)} className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto mb-4 mx-auto block">Disconnect Wallet</button>
+        <button onClick={disconnectWallet} className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto mb-4 mx-auto block">Disconnect Wallet</button>
         <h1 className="text-3xl font-display font-bold text-center mb-6">Your Properties</h1>
         <p className="text-center text-warmGray mb-4">Connected: {address.slice(0, 6)}...{address.slice(-4)}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
