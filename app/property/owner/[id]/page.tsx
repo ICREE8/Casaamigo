@@ -117,7 +117,7 @@ export default function OwnerPropertyDashboard() {
     <div className="min-h-screen bg-white text-navy font-body">
       <Header />
       <div className="container mx-auto p-5 pt-20">
-        <div className="bg-gray-100 text-navy p-6 rounded-lg max-w-2xl mx-auto w-full font-sans border border-gray-200">
+        <div className="bg-gray-300 text-navy p-6 rounded-lg max-w-2xl mx-auto w-full font-sans border border-gray-400">
           <div className="relative">
             <img 
               src={property.img} 

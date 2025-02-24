@@ -69,7 +69,7 @@ export default function Dashboard() {
           {ownedProperties.length > 0 ? (
             ownedProperties.map(prop => (
               <Link key={prop.id} href={`/property/owner/${prop.id}`}>
-                <div className="bg-white text-navy p-4 rounded-lg flex flex-col h-full cursor-pointer hover:shadow-lg transition-shadow border border-gray-200">
+                <div className="bg-gray-300 text-navy p-4 rounded-lg flex flex-col h-full cursor-pointer hover:shadow-lg transition-shadow border border-gray-400">
                   <img src={prop.img} alt={prop.name} className="w-full h-48 object-cover rounded-lg mb-4 border-2 border-ochre" />
                   <div className="flex-1">
                     <h2 className="text-xl font-display font-bold mb-2 flex justify-between items-center">

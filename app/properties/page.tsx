@@ -78,7 +78,7 @@ export default function Properties() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             {filteredProperties.map(prop => (
               <Link key={prop.id} href={`/property/${prop.id}`}>
-                <div className="bg-gray-100 text-navy p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow flex flex-col h-full border border-gray-200">
+                <div className="bg-gray-300 text-navy p-4 rounded-lg cursor-pointer hover:bg-gray-200 hover:shadow-xl transition-all flex flex-col h-full border border-gray-400">
                   <img src={prop.img} alt={prop.name} className="w-full h-48 object-cover rounded-lg mb-4 border-2 border-ochre" />
                   <div className="flex-1">
                     <h2 className="text-xl font-display font-bold mb-2 flex justify-between items-center">

@@ -86,7 +86,7 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
   };
 
   return (
-    <div className="bg-gray-100 text-navy p-6 rounded-lg max-w-2xl mx-auto w-full font-sans border border-gray-200">
+    <div className="bg-gray-300 text-navy p-6 rounded-lg max-w-2xl mx-auto w-full font-sans border border-gray-400">
       <div className="relative">
         <img 
           src={galleryImages[currentImageIndex]} 
@@ -107,7 +107,7 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
         </button>
       </div>
       <h2 className="text-2xl font-bold mb-2 font-display text-navy">{name}</h2>
-      <p className="text-ochre text-base mb-2">{city}, {country}</p>
+      <p className="text-ochre text-base mb-2">{city}, {country}</p> {/* Fixed: property.city → city */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-body">
         <div className="flex flex-col">
           <p className="text-gray-600 text-lg">🛏️ Bedrooms: <span className="text-teal text-lg">{bedrooms}</span></p>
