@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Casaamigo - Fractional Caribbean Real Estate Investment Platform
 
-## Getting Started
+**Built with Next.js 15.1.7 (Turbopack), React, Leaflet, and Tailwind CSS**
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What is Casaamigo?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Casaamigo is a cutting-edge platform that lets you own a piece of paradise—fractional real estate investments in the Caribbean, starting with properties in Colombia (Santa Marta, Medellin) and Venezuela (Isla de Margarita, Tucacas, Merida, Cuyagua). 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+It’s public-friendly—anyone can browse properties and drool over the Caribbean dream
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Who’s It For?
 
-## Learn More
+- **Investors:** Savvy folks looking to dip into Caribbean real estate without buying whole properties—fractional shares start at $12,000-$20,000.
+- **Dreamers:** Public users who wanna browse tropical pads—Santa Marta beachfronts to Medellin penthouses—before committing.
+- **Devs & Builders:** Open-source enthusiasts or xAI fans wanting to hack on a Next.js app with Leaflet maps, Tailwind styling, and wallet integration.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Property Grid:** 3 cards per row on desktop, 1 on mobile—responsive, compact, Airbnb-style—name and `$value` inline, Ochre city/country flair.
+- **Interactive Map:** Toggle “Map View”—Ochre pins for Santa Marta, Medellin, and Venezuelan hotspots—click pins to dive into property details.
+- **Search Bar:** Type “San” and get “Santa Marta”—filters to our 6 cities, no fluff.
+- **Property Dashboards:**
+  - **Public View:** Carousel pics, Bedrooms/Baths/Pool left, Home Value/Share Price right—Ochre hooks, Teal details, White contrasts.
+  - **Shareholder View:** Adds Your Shares, ROI—same clean split.
+- **Wallet Connect:** Login page with MetaMask—connect your Ethereum wallet to invest (social auth TBD).
+- **Navigation:** “Return Home” on every page—Ochre button, Tesla-tight UX.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Next.js 15.1.7 (Turbopack):** App Router, server/client split—fast builds, live updates.
+- **React:** Client-side magic—carousels, toggles, state-driven grids.
+- **Leaflet (react-leaflet):** Lightweight maps—Ochre pins, no Google bloat.
+- **Tailwind CSS:** Utility-first styling—Navy Blue (`#1A2A44`), Ochre (`#DAA520`), Teal (`#26A69A`), White (`#FFFFFF`), Warm Gray (`#B0A999`), Charcoal (`#36454F`).
+- **Ethers.js:** Wallet connect—MetaMask hooks for Ethereum action.
+- **NextAuth.js:** Session wrapper—ready for Google auth (pending `.env` setup).
+
+---
+
+## Prerequisites
+
+- **Node.js:** v18+ (LTS recommended)—powers the beast.
+- **npm:** v9+—package muscle (or swap for yarn/pnpm if you’re fancy).
+- **MetaMask:** Browser extension—test wallet connect (no real ETH needed yet).
+- **Git:** Clone this rocket—`git clone https://github.com/ICREE8/Casaamigo.git`.
+
+---
+
+## Setup Instructions
+
+1. **Clone the Repo:**
+   ```bash
+   git clone https://github.com/ICREE8/Casaamigo.git
+   cd Casaamigo
