@@ -6,7 +6,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// Custom Ochre marker icon
 const ochreIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
   iconSize: [25, 41],
@@ -36,9 +35,6 @@ export default function Properties() {
     <div className="min-h-screen bg-white text-navy font-body">
       <Header />
       <div className="container mx-auto p-5 pt-20">
-        <Link href="/" className="block text-center mb-4">
-          <button className="bg-ochre text-white px-6 py-2 rounded w-full sm:w-auto">Return Home</button>
-        </Link>
         <h1 className="text-3xl font-display font-bold text-center mb-4">Explore Properties</h1>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
           <input 
@@ -50,7 +46,7 @@ export default function Properties() {
           />
           <button 
             onClick={() => setShowMap(!showMap)} 
-            className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto hover:bg-ochre"
+            className="bg-teal text-white px-4 py-1 rounded text-sm font-display hover:bg-ochre w-full sm:w-auto"
           >
             {showMap ? 'List View' : 'Map View'}
           </button>
@@ -67,10 +63,8 @@ export default function Properties() {
                   <Popup>
                     <Link href={`/property/${prop.id}`}>
                       <div className="text-navy">
-                        <h3 className="font-bold">
-                          {prop.name} <span className="text-white font-bold float-right">${prop.value.toLocaleString()}</span>
-                        </h3>
-                        <p className="text-ochre">{prop.city}, {prop.country}</p>
+                        <h3 className="font-bold">{prop.name} ${prop.value.toLocaleString()}</h3>
+                        <p>{prop.city}, {prop.country}</p>
                         <p>Share Price: ${prop.sharePrice.toLocaleString()}</p>
                       </div>
                     </Link>
@@ -81,21 +75,21 @@ export default function Properties() {
           </div>
         )}
         {!showMap && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             {filteredProperties.map(prop => (
               <Link key={prop.id} href={`/property/${prop.id}`}>
-                <div className="bg-navy text-white p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow flex flex-col h-full">
-                  <img src={prop.img} alt={prop.name} className="w-full h-48 object-cover rounded-lg mb-4 opacity-90 border-2 border-warmGray" />
+                <div className="bg-gray-100 text-navy p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow flex flex-col h-full border border-gray-200">
+                  <img src={prop.img} alt={prop.name} className="w-full h-48 object-cover rounded-lg mb-4 border-2 border-ochre" />
                   <div className="flex-1">
                     <h2 className="text-xl font-display font-bold mb-2 flex justify-between items-center">
                       <span>{prop.name}</span>
-                      <span className="text-white text-lg font-bold">${prop.value.toLocaleString()}</span>
+                      <span className="text-navy text-lg font-bold">${prop.value.toLocaleString()}</span>
                     </h2>
                     <p className="text-ochre text-base mb-2">{prop.city}, {prop.country}</p>
                     <div className="grid grid-cols-1 gap-2">
                       <div className="flex flex-col">
-                        <p className="text-warmGray text-base">Share Price: <span className="text-teal text-lg">${prop.sharePrice.toLocaleString()}</span></p>
-                        <p className="text-warmGray text-base">Shares: <span className="text-teal">{prop.shares}</span></p>
+                        <p className="text-gray-600 text-base">Share Price: <span className="text-ochre text-lg">${prop.sharePrice.toLocaleString()}</span></p>
+                        <p className="text-gray-600 text-base">Shares: <span className="text-teal">{prop.shares}</span></p>
                       </div>
                     </div>
                   </div>
@@ -104,6 +98,11 @@ export default function Properties() {
             ))}
           </div>
         )}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/">
+            <button className="bg-ochre text-white px-4 py-1 rounded text-sm font-display hover:bg-teal w-full sm:w-auto">Return Home</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

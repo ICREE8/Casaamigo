@@ -86,7 +86,7 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
   };
 
   return (
-    <div className="bg-white text-navy p-6 rounded-lg max-w-2xl mx-auto w-full font-sans border border-gray-200">
+    <div className="bg-gray-100 text-navy p-6 rounded-lg max-w-2xl mx-auto w-full font-sans border border-gray-200">
       <div className="relative">
         <img 
           src={galleryImages[currentImageIndex]} 
