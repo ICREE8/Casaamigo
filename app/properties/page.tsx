@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 const ochreIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -35,18 +35,18 @@ export default function Properties() {
     <div className="min-h-screen">
       <Header />
       <div className="container mx-auto p-5 pt-20">
-        <h1 className="text-3xl font-bold text-center mb-4">Explore Properties</h1>
+        <h1 className="text-2xl font-bold text-center mb-6">Explore Properties</h1>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
           <input 
             type="text" 
             placeholder="Search cities (e.g., Santa Marta)" 
             value={search} 
             onChange={(e) => setSearch(e.target.value)} 
-            className="w-full max-w-md p-2 border border-[var(--secondary-color)] rounded-lg text-[var(--text-color)] focus:outline-none focus:border-[var(--accent-color)]"
+            className="w-full max-w-md p-2 border border-[var(--airbnb-grey)] rounded-lg focus:outline-none focus:border-[var(--airbnb-red)]"
           />
           <button 
             onClick={() => setShowMap(!showMap)} 
-            className="btn-secondary w-full sm:w-auto"
+            className="btn-secondary w-full sm:w-auto text-sm"
           >
             {showMap ? 'List View' : 'Map View'}
           </button>
@@ -62,10 +62,10 @@ export default function Properties() {
                 <Marker key={prop.id} position={[prop.lat, prop.lng]} icon={ochreIcon}>
                   <Popup>
                     <Link href={`/property/${prop.id}`}>
-                      <div className="text-[var(--text-color)]">
-                        <h3 className="font-bold">{prop.name} ${prop.value.toLocaleString()}</h3>
-                        <p>{prop.city}, {prop.country}</p>
-                        <p>Share Price: <span className="text-accent">${prop.sharePrice.toLocaleString()}</span></p>
+                      <div>
+                        <h3 className="font-bold">{prop.name}</h3>
+                        <p className="text-muted">${prop.value.toLocaleString()}</p>
+                        <p className="text-muted">{prop.city}, {prop.country}</p>
                       </div>
                     </Link>
                   </Popup>
@@ -78,29 +78,23 @@ export default function Properties() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             {filteredProperties.map(prop => (
               <Link key={prop.id} href={`/property/${prop.id}`}>
-                <div className="card cursor-pointer hover:bg-[var(--neutral-gray)] hover:shadow-xl transition-all flex flex-col h-full">
-                  <img src={prop.img} alt={prop.name} className="w-full h-48 object-cover rounded-lg mb-4 border-2 border-[var(--accent-color)]" />
-                  <div className="flex-1">
-                    <h2 className="text-xl font-bold mb-2 flex justify-between items-center">
-                      <span>{prop.name}</span>
-                      <span className="text-[var(--text-color)] text-lg font-bold">${prop.value.toLocaleString()}</span>
-                    </h2>
-                    <p className="text-accent text-base mb-2">{prop.city}, {prop.country}</p>
-                    <div className="grid grid-cols-1 gap-2">
-                      <div className="flex flex-col">
-                        <p>Share Price: <span className="text-accent text-lg">${prop.sharePrice.toLocaleString()}</span></p>
-                        <p>Shares: <span className="text-[var(--secondary-color)]">{prop.shares}</span></p>
-                      </div>
-                    </div>
+                <div className="card flex flex-col h-full cursor-pointer">
+                  <img src={prop.img} alt={prop.name} className="w-full h-48 object-cover rounded-t-lg" />
+                  <div className="p-4 flex-1">
+                    <h2 className="text-lg font-bold mb-1">{prop.name}</h2>
+                    <p className="text-muted text-sm mb-1">{prop.city}, {prop.country}</p>
+                    <p className="text-muted text-sm">Share Price: ${prop.sharePrice.toLocaleString()}</p>
+                    <p className="text-muted text-sm">Shares: {prop.shares}</p>
+                    <p className="font-bold mt-2">${prop.value.toLocaleString()}</p>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
         )}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex justify-center">
           <Link href="/">
-            <button className="btn-primary w-full sm:w-auto">Return Home</button>
+            <button className="btn-primary">Return Home</button>
           </Link>
         </div>
       </div>

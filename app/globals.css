@@ -3,51 +3,53 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #2E8B57; /* Sea Green */
-  --secondary-color: #6495ED; /* Cornflower Blue */
-  --background-color: #F8F8FF; /* GhostWhite */
-  --text-color: #36454F; /* Charcoal */
-  --accent-color: #FFD700; /* Gold */
-  --neutral-gray: #D3D3D3; /* LightGray */
-  --dark-accent: #191970; /* MidnightBlue */
+  --airbnb-white: #FFFFFF;
+  --airbnb-charcoal: #222222;
+  --airbnb-red: #FF5A5F;
+  --airbnb-grey: #D3D3D3;
+  --airbnb-shadow: rgba(0, 0, 0, 0.1);
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: sans-serif;
+  background-color: var(--airbnb-white);
+  color: var(--airbnb-charcoal);
+  font-family: 'Circular', 'Arial', sans-serif;
 }
 
-/* Custom classes for consistency */
+.card {
+  background-color: var(--airbnb-white);
+  border: 1px solid var(--airbnb-grey);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 4px var(--airbnb-shadow);
+  transition: box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 8px var(--airbnb-shadow);
+}
 .btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font-family: 'Arial', sans-serif;
+  background-color: var(--airbnb-red);
+  color: var(--airbnb-white);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Circular', 'Arial', sans-serif;
 }
 .btn-primary:hover {
-  background-color: var(--accent-color);
+  background-color: #E00B41;
 }
 .btn-secondary {
-  background-color: var(--secondary-color);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font-family: 'Arial', sans-serif;
+  background-color: var(--airbnb-white);
+  color: var(--airbnb-charcoal);
+  border: 1px solid var(--airbnb-grey);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Circular', 'Arial', sans-serif;
 }
 .btn-secondary:hover {
-  background-color: var(--dark-accent);
+  border-color: var(--airbnb-charcoal);
 }
-.card {
-  background-color: var(--neutral-gray);
-  border: 1px solid var(--dark-accent);
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
-.text-accent {
-  color: var(--accent-color);
-}
-.text-primary {
-  color: var(--primary-color);
+.text-muted {
+  color: #717171;
 }

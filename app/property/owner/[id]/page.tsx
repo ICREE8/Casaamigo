@@ -82,10 +82,10 @@ export default function OwnerPropertyDashboard() {
   if (!address) {
     return (
       <div className="min-h-screen flex items-center justify-center p-5">
-        <div className="bg-[var(--background-color)] text-[var(--text-color)] p-6 rounded-lg max-w-md w-full text-center border border-[var(--dark-accent)]">
-          <h1 className="text-3xl font-bold mb-4">Please Connect Wallet</h1>
+        <div className="bg-[var(--airbnb-white)] text-[var(--airbnb-charcoal)] p-6 rounded-lg max-w-md w-full text-center border border-[var(--airbnb-grey)]">
+          <h1 className="text-2xl font-bold mb-4">Please Connect Wallet</h1>
           <Link href="/login">
-            <button className="btn-secondary w-full">Go to Login</button>
+            <button className="btn-primary w-full">Go to Login</button>
           </Link>
         </div>
       </div>
@@ -117,78 +117,80 @@ export default function OwnerPropertyDashboard() {
     <div className="min-h-screen">
       <Header />
       <div className="container mx-auto p-5 pt-20">
-        <div className="card">
+        <div className="card max-w-2xl mx-auto">
           <div className="relative">
             <img 
               src={property.img} 
               alt={property.name} 
-              className="w-full h-64 object-cover rounded-lg mb-4 border-2 border-[var(--accent-color)]"
+              className="w-full h-64 object-cover rounded-t-lg"
             />
           </div>
-          <h2 className="text-2xl font-bold mb-2">{property.name}</h2>
-          <p className="text-accent text-base mb-2">{property.city}, {property.country}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <div className="flex flex-col">
-              <p>🛏️ Bedrooms: <span className="text-[var(--primary-color)] text-lg">{property.bedrooms}</span></p>
-              <p>🛁 Bathrooms: <span className="text-[var(--primary-color)] text-lg">{property.bathrooms}</span></p>
-              <p>🏊 Pool: <span className="text-[var(--primary-color)] text-lg">{property.pool ? 'Yes' : 'No'}</span></p>
-              <p>Monthly Income: <span className="text-[var(--primary-color)] text-lg">${property.monthlyIncome.toLocaleString()}</span></p>
-              <p>Square Meters: <span className="text-[var(--primary-color)] text-lg">{property.squareMeters} m²</span></p>
-              <p>Year Built: <span className="text-[var(--primary-color)] text-lg">{property.yearBuilt}</span></p>
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-2">{property.name}</h2>
+            <p className="text-muted text-base mb-4">{property.city}, {property.country}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <div>
+                <p className="text-muted">🛏️ Bedrooms: <span className="font-medium">{property.bedrooms}</span></p>
+                <p className="text-muted">🛁 Bathrooms: <span className="font-medium">{property.bathrooms}</span></p>
+                <p className="text-muted">🏊 Pool: <span className="font-medium">{property.pool ? 'Yes' : 'No'}</span></p>
+                <p className="text-muted">Monthly Income: <span className="font-medium">${property.monthlyIncome.toLocaleString()}</span></p>
+                <p className="text-muted">Square Meters: <span className="font-medium">{property.squareMeters} m²</span></p>
+                <p className="text-muted">Year Built: <span className="font-medium">{property.yearBuilt}</span></p>
+              </div>
+              <div>
+                <p className="text-muted">Home Value: <span className="font-bold">${property.value.toLocaleString()}</span></p>
+                <p className="text-muted">Share Price: <span className="font-medium">${property.sharePrice.toLocaleString()}</span></p>
+                <p className="text-muted">Monthly Expenses: <span className="font-medium">${property.monthlyExpenses.toLocaleString()}</span></p>
+                <p className="text-muted">Net Monthly: <span className="font-medium">${(property.monthlyIncome - property.monthlyExpenses).toLocaleString()}</span></p>
+                <p className="text-muted">Property Taxes: <span className="font-medium">${property.propertyTaxes.toLocaleString()} /yr</span></p>
+                <p className="text-muted">Zipcode: <span className="font-medium">{property.zipcode}</span></p>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <p>Home Value: <span className="text-[var(--text-color)] text-lg font-bold">${property.value.toLocaleString()}</span></p>
-              <p>Share Price: <span className="text-accent text-lg">${property.sharePrice.toLocaleString()}</span></p>
-              <p>Monthly Expenses: <span className="text-[var(--text-color)] text-lg">${property.monthlyExpenses.toLocaleString()}</span></p>
-              <p>Net Monthly: <span className="text-accent text-lg">${(property.monthlyIncome - property.monthlyExpenses).toLocaleString()}</span></p>
-              <p>Property Taxes: <span className="text-[var(--primary-color)] text-lg">${property.propertyTaxes.toLocaleString()} /yr</span></p>
-              <p>Zipcode: <span className="text-[var(--primary-color)] text-lg">{property.zipcode}</span></p>
-            </div>
-          </div>
-          <div className="mb-4">
-            <h3 className="text-xl font-bold mb-2">👥 Owners</h3>
-            <ul className="list-disc pl-5">
-              {property.owners.map((owner, index) => (
-                <li key={index} className="text-[var(--primary-color)]">{owner}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="mb-4">
-            <h3 className="text-xl font-bold mb-2">Additional Details</h3>
-            <p>Listing Date: <span className="text-[var(--primary-color)]">{property.listingDate}</span></p>
-            <p>Last Renovation: <span className="text-[var(--primary-color)]">{property.lastRenovation}</span></p>
-          </div>
-          <div className="mb-4">
-            <h3 className="text-xl font-bold mb-2">Proposed Updates</h3>
-            {mockProposals.length > 0 ? (
-              <ul className="list-disc pl-5">
-                {mockProposals.map(proposal => (
-                  <li key={proposal.id}>
-                    {proposal.text} - Votes: 
-                    <span className="text-[var(--primary-color)]"> Vitalik: {proposal.votes['vitalik.eth']}, Elon: {proposal.votes['elonmusk.eth'] || 'N/A'}</span>
-                  </li>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">👥 Owners</h3>
+              <ul className="list-disc pl-5 text-muted">
+                {property.owners.map((owner, index) => (
+                  <li key={index}>{owner}</li>
                 ))}
               </ul>
-            ) : (
-              <p>No proposals yet.</p>
-            )}
-          </div>
-          <div className="mb-6">
-            <h3 className="text-xl font-bold mb-2">Propose an Update or Remodel</h3>
-            <p className="mb-2">Have an idea to improve {property.name}? Suggest it below to vote with other owners!</p>
-            <textarea
-              className="w-full p-2 border border-[var(--secondary-color)] rounded-lg text-[var(--text-color)] bg-[var(--background-color)] focus:outline-none focus:border-[var(--accent-color)]"
-              rows={4}
-              value={proposal}
-              onChange={(e) => setProposal(e.target.value)}
-              placeholder="E.g., Add a rooftop deck, upgrade kitchen appliances..."
-            />
-            <button onClick={submitProposal} className="mt-2 btn-primary w-full sm:w-auto">Submit for Voting</button>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/dashboard">
-              <button className="btn-secondary w-full sm:w-auto">Back to Dashboard</button>
-            </Link>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">Additional Details</h3>
+              <p className="text-muted">Listing Date: <span className="font-medium">{property.listingDate}</span></p>
+              <p className="text-muted">Last Renovation: <span className="font-medium">{property.lastRenovation}</span></p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">Proposed Updates</h3>
+              {mockProposals.length > 0 ? (
+                <ul className="list-disc pl-5 text-muted">
+                  {mockProposals.map(proposal => (
+                    <li key={proposal.id}>
+                      {proposal.text} - Votes: 
+                      <span className="font-medium"> Vitalik: {proposal.votes['vitalik.eth']}, Elon: {proposal.votes['elonmusk.eth'] || 'N/A'}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-muted">No proposals yet.</p>
+              )}
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">Propose an Update or Remodel</h3>
+              <p className="text-muted mb-2">Have an idea to improve {property.name}? Suggest it below to vote with other owners!</p>
+              <textarea
+                className="w-full p-2 border border-[var(--airbnb-grey)] rounded-lg focus:outline-none focus:border-[var(--airbnb-red)]"
+                rows={4}
+                value={proposal}
+                onChange={(e) => setProposal(e.target.value)}
+                placeholder="E.g., Add a rooftop deck, upgrade kitchen appliances..."
+              />
+              <button onClick={submitProposal} className="mt-2 btn-primary w-full sm:w-auto">Submit for Voting</button>
+            </div>
+            <div className="flex gap-4">
+              <Link href="/dashboard" className="flex-1">
+                <button className="btn-secondary w-full">Back to Dashboard</button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
