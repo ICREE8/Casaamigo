@@ -86,61 +86,61 @@ const PropertyDetailsPublic: React.FC<PropertyDetailsProps> = ({ name, value, sh
   };
 
   return (
-    <div className="bg-gray-300 text-navy p-6 rounded-lg max-w-2xl mx-auto w-full font-sans border border-gray-400">
+    <div className="card">
       <div className="relative">
         <img 
           src={galleryImages[currentImageIndex]} 
           alt={name} 
-          className="w-full h-64 object-cover rounded-lg mb-4 border-2 border-ochre"
+          className="w-full h-64 object-cover rounded-lg mb-4 border-2 border-[var(--accent-color)]"
         />
         <button 
           onClick={prevImage} 
-          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-teal text-white p-2 rounded-full hover:bg-ochre"
+          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-[var(--secondary-color)] text-white p-2 rounded-full hover:bg-[var(--dark-accent)]"
         >
           ←
         </button>
         <button 
           onClick={nextImage} 
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-teal text-white p-2 rounded-full hover:bg-ochre"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[var(--secondary-color)] text-white p-2 rounded-full hover:bg-[var(--dark-accent)]"
         >
           →
         </button>
       </div>
-      <h2 className="text-2xl font-bold mb-2 font-display text-navy">{name}</h2>
-      <p className="text-ochre text-base mb-2">{city}, {country}</p> {/* Fixed: property.city → city */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-body">
+      <h2 className="text-2xl font-bold mb-2">{name}</h2>
+      <p className="text-accent text-base mb-2">{city}, {country}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div className="flex flex-col">
-          <p className="text-gray-600 text-lg">🛏️ Bedrooms: <span className="text-teal text-lg">{bedrooms}</span></p>
-          <p className="text-gray-600 text-lg">🛁 Bathrooms: <span className="text-teal text-lg">{bathrooms}</span></p>
-          <p className="text-gray-600 text-lg">🏊 Pool: <span className="text-teal text-lg">{pool ? 'Yes' : 'No'}</span></p>
-          <p className="text-gray-600 text-lg">Monthly Income: <span className="text-teal text-lg">${monthlyIncome.toLocaleString()}</span></p>
+          <p>🛏️ Bedrooms: <span className="text-[var(--primary-color)] text-lg">{bedrooms}</span></p>
+          <p>🛁 Bathrooms: <span className="text-[var(--primary-color)] text-lg">{bathrooms}</span></p>
+          <p>🏊 Pool: <span className="text-[var(--primary-color)] text-lg">{pool ? 'Yes' : 'No'}</span></p>
+          <p>Monthly Income: <span className="text-[var(--primary-color)] text-lg">${monthlyIncome.toLocaleString()}</span></p>
         </div>
         <div className="flex flex-col">
-          <p className="text-gray-600 text-lg">Home Value: <span className="text-navy text-lg font-bold">${value.toLocaleString()}</span></p>
-          <p className="text-gray-600 text-lg">Share Price: <span className="text-ochre text-lg">${sharePrice.toLocaleString()}</span></p>
-          <p className="text-gray-600 text-lg">Monthly Expenses: <span className="text-navy text-lg">${monthlyExpenses.toLocaleString()}</span></p>
-          <p className="text-gray-600 text-lg">Net Monthly: <span className="text-ochre text-lg">${(monthlyIncome - monthlyExpenses).toLocaleString()}</span></p>
-          <p className="text-gray-600 text-lg">Shares Available: <span className="text-navy text-lg">{localShares}</span></p>
+          <p>Home Value: <span className="text-[var(--text-color)] text-lg font-bold">${value.toLocaleString()}</span></p>
+          <p>Share Price: <span className="text-accent text-lg">${sharePrice.toLocaleString()}</span></p>
+          <p>Monthly Expenses: <span className="text-[var(--text-color)] text-lg">${monthlyExpenses.toLocaleString()}</span></p>
+          <p>Net Monthly: <span className="text-accent text-lg">${(monthlyIncome - monthlyExpenses).toLocaleString()}</span></p>
+          <p>Shares Available: <span className="text-[var(--text-color)] text-lg">{localShares}</span></p>
         </div>
       </div>
       <div className="flex flex-col sm:flex-row gap-4 mb-4">
         {address ? (
           <>
-            <button onClick={buyWithFiat} className="bg-teal text-white px-6 py-2 rounded font-bold w-full sm:w-auto font-display hover:bg-ochre">Buy with Fiat</button>
-            <button onClick={buyWithCrypto} className="bg-ochre text-white px-6 py-2 rounded font-bold w-full sm:w-auto font-display hover:bg-teal">Buy with Crypto</button>
+            <button onClick={buyWithFiat} className="btn-secondary w-full sm:w-auto">Buy with Fiat</button>
+            <button onClick={buyWithCrypto} className="btn-primary w-full sm:w-auto">Buy with Crypto</button>
           </>
         ) : (
           <Link href="/login">
-            <button className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto font-display hover:bg-ochre">Login to Invest</button>
+            <button className="btn-secondary w-full sm:w-auto">Login to Invest</button>
           </Link>
         )}
       </div>
       <div className="flex flex-col sm:flex-row gap-4">
         <Link href="/">
-          <button className="bg-ochre text-white px-6 py-2 rounded w-full sm:w-auto font-display hover:bg-teal">Return Home</button>
+          <button className="btn-primary w-full sm:w-auto">Return Home</button>
         </Link>
         <Link href="/properties">
-          <button className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto font-display hover:bg-ochre">Back to Properties</button>
+          <button className="btn-secondary w-full sm:w-auto">Back to Properties</button>
         </Link>
       </div>
     </div>

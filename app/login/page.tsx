@@ -31,22 +31,22 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-navy font-body flex items-center justify-center p-5">
-      <div className="bg-navy text-white p-6 rounded-lg max-w-md w-full font-sans">
-        <h1 className="text-3xl font-display font-bold text-center mb-6">Login to Casaamigo</h1>
+    <div className="min-h-screen flex items-center justify-center p-5">
+      <div className="bg-[var(--background-color)] text-[var(--text-color)] p-6 rounded-lg max-w-md w-full text-center border border-[var(--dark-accent)]">
+        <h1 className="text-3xl font-bold mb-6">Login to Casaamigo</h1>
         <div className="flex flex-col gap-4">
           <button
             onClick={connectWallet}
-            className="bg-teal text-white px-6 py-3 rounded text-lg font-display hover:bg-ochre w-full"
+            className="btn-secondary w-full"
           >
             {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Connect Wallet'}
           </button>
           {error && (
-            <div className="text-center text-red-500 mb-4">
+            <div className="text-red-500 mb-4">
               <p>{error}</p>
               <button
                 onClick={connectWallet}
-                className="mt-2 bg-ochre text-white px-4 py-1 rounded text-sm hover:bg-teal"
+                className="mt-2 bg-[var(--accent-color)] text-[var(--text-color)] px-4 py-1 rounded text-sm hover:bg-[var(--dark-accent)] hover:text-white"
               >
                 Retry
               </button>
@@ -54,7 +54,7 @@ export default function Login() {
           )}
         </div>
         <Link href="/" className="block text-center mt-4">
-          <button className="bg-ochre text-white px-6 py-2 rounded w-full">Return Home</button>
+          <button className="btn-primary w-full">Return Home</button>
         </Link>
       </div>
     </div>

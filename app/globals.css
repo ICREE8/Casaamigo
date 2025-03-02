@@ -1,35 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #2E8B57; /* Sea Green */
+  --secondary-color: #6495ED; /* Cornflower Blue */
+  --background-color: #F8F8FF; /* GhostWhite */
+  --text-color: #36454F; /* Charcoal */
+  --accent-color: #FFD700; /* Gold */
+  --neutral-gray: #D3D3D3; /* LightGray */
+  --dark-accent: #191970; /* MidnightBlue */
+}
+
 body {
-  @apply bg-white text-navy min-h-screen font-body;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: sans-serif;
 }
 
-.container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+/* Custom classes for consistency */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-family: 'Arial', sans-serif;
 }
-
-header {
-  @apply flex-col sm:flex-row;
+.btn-primary:hover {
+  background-color: var(--accent-color);
 }
-
-.font-body {
-  font-family: 'Inter', sans-serif;
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-family: 'Arial', sans-serif;
 }
-
-.font-display {
-  font-family: 'Montserrat', sans-serif;
+.btn-secondary:hover {
+  background-color: var(--dark-accent);
 }
-
-/* Fix Leaflet default icon */
-.leaflet-container {
-  width: 100%;
-  height: 100%;
+.card {
+  background-color: var(--neutral-gray);
+  border: 1px solid var(--dark-accent);
+  border-radius: 0.5rem;
+  padding: 1rem;
 }
-
-.leaflet-control-attribution {
-  font-size: 10px;
+.text-accent {
+  color: var(--accent-color);
+}
+.text-primary {
+  color: var(--primary-color);
 }

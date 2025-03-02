@@ -81,11 +81,11 @@ export default function OwnerPropertyDashboard() {
 
   if (!address) {
     return (
-      <div className="min-h-screen bg-white text-navy font-body flex items-center justify-center p-5">
-        <div className="bg-white text-navy p-6 rounded-lg max-w-md w-full font-sans text-center border border-gray-200">
-          <h1 className="text-3xl font-display font-bold mb-4">Please Connect Wallet</h1>
+      <div className="min-h-screen flex items-center justify-center p-5">
+        <div className="bg-[var(--background-color)] text-[var(--text-color)] p-6 rounded-lg max-w-md w-full text-center border border-[var(--dark-accent)]">
+          <h1 className="text-3xl font-bold mb-4">Please Connect Wallet</h1>
           <Link href="/login">
-            <button className="bg-teal text-white px-6 py-2 rounded w-full font-display hover:bg-ochre">Go to Login</button>
+            <button className="btn-secondary w-full">Go to Login</button>
           </Link>
         </div>
       </div>
@@ -114,80 +114,80 @@ export default function OwnerPropertyDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-navy font-body">
+    <div className="min-h-screen">
       <Header />
       <div className="container mx-auto p-5 pt-20">
-        <div className="bg-gray-300 text-navy p-6 rounded-lg max-w-2xl mx-auto w-full font-sans border border-gray-400">
+        <div className="card">
           <div className="relative">
             <img 
               src={property.img} 
               alt={property.name} 
-              className="w-full h-64 object-cover rounded-lg mb-4 border-2 border-ochre"
+              className="w-full h-64 object-cover rounded-lg mb-4 border-2 border-[var(--accent-color)]"
             />
           </div>
-          <h2 className="text-2xl font-bold mb-2 font-display text-navy">{property.name}</h2>
-          <p className="text-ochre text-base mb-2">{property.city}, {property.country}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-body">
+          <h2 className="text-2xl font-bold mb-2">{property.name}</h2>
+          <p className="text-accent text-base mb-2">{property.city}, {property.country}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div className="flex flex-col">
-              <p className="text-gray-600 text-lg">🛏️ Bedrooms: <span className="text-teal text-lg">{property.bedrooms}</span></p>
-              <p className="text-gray-600 text-lg">🛁 Bathrooms: <span className="text-teal text-lg">{property.bathrooms}</span></p>
-              <p className="text-gray-600 text-lg">🏊 Pool: <span className="text-teal text-lg">{property.pool ? 'Yes' : 'No'}</span></p>
-              <p className="text-gray-600 text-lg">Monthly Income: <span className="text-teal text-lg">${property.monthlyIncome.toLocaleString()}</span></p>
-              <p className="text-gray-600 text-lg">Square Meters: <span className="text-teal text-lg">{property.squareMeters} m²</span></p>
-              <p className="text-gray-600 text-lg">Year Built: <span className="text-teal text-lg">{property.yearBuilt}</span></p>
+              <p>🛏️ Bedrooms: <span className="text-[var(--primary-color)] text-lg">{property.bedrooms}</span></p>
+              <p>🛁 Bathrooms: <span className="text-[var(--primary-color)] text-lg">{property.bathrooms}</span></p>
+              <p>🏊 Pool: <span className="text-[var(--primary-color)] text-lg">{property.pool ? 'Yes' : 'No'}</span></p>
+              <p>Monthly Income: <span className="text-[var(--primary-color)] text-lg">${property.monthlyIncome.toLocaleString()}</span></p>
+              <p>Square Meters: <span className="text-[var(--primary-color)] text-lg">{property.squareMeters} m²</span></p>
+              <p>Year Built: <span className="text-[var(--primary-color)] text-lg">{property.yearBuilt}</span></p>
             </div>
             <div className="flex flex-col">
-              <p className="text-gray-600 text-lg">Home Value: <span className="text-navy text-lg font-bold">${property.value.toLocaleString()}</span></p>
-              <p className="text-gray-600 text-lg">Share Price: <span className="text-ochre text-lg">${property.sharePrice.toLocaleString()}</span></p>
-              <p className="text-gray-600 text-lg">Monthly Expenses: <span className="text-navy text-lg">${property.monthlyExpenses.toLocaleString()}</span></p>
-              <p className="text-gray-600 text-lg">Net Monthly: <span className="text-ochre text-lg">${(property.monthlyIncome - property.monthlyExpenses).toLocaleString()}</span></p>
-              <p className="text-gray-600 text-lg">Property Taxes: <span className="text-teal text-lg">${property.propertyTaxes.toLocaleString()} /yr</span></p>
-              <p className="text-gray-600 text-lg">Zipcode: <span className="text-teal text-lg">{property.zipcode}</span></p>
+              <p>Home Value: <span className="text-[var(--text-color)] text-lg font-bold">${property.value.toLocaleString()}</span></p>
+              <p>Share Price: <span className="text-accent text-lg">${property.sharePrice.toLocaleString()}</span></p>
+              <p>Monthly Expenses: <span className="text-[var(--text-color)] text-lg">${property.monthlyExpenses.toLocaleString()}</span></p>
+              <p>Net Monthly: <span className="text-accent text-lg">${(property.monthlyIncome - property.monthlyExpenses).toLocaleString()}</span></p>
+              <p>Property Taxes: <span className="text-[var(--primary-color)] text-lg">${property.propertyTaxes.toLocaleString()} /yr</span></p>
+              <p>Zipcode: <span className="text-[var(--primary-color)] text-lg">{property.zipcode}</span></p>
             </div>
           </div>
           <div className="mb-4">
-            <h3 className="text-xl font-bold mb-2 font-display text-navy">👥 Owners</h3>
-            <ul className="list-disc pl-5 text-gray-600">
+            <h3 className="text-xl font-bold mb-2">👥 Owners</h3>
+            <ul className="list-disc pl-5">
               {property.owners.map((owner, index) => (
-                <li key={index} className="text-teal">{owner}</li>
+                <li key={index} className="text-[var(--primary-color)]">{owner}</li>
               ))}
             </ul>
           </div>
           <div className="mb-4">
-            <h3 className="text-xl font-bold mb-2 font-display text-navy">Additional Details</h3>
-            <p className="text-gray-600 text-lg">Listing Date: <span className="text-teal">{property.listingDate}</span></p>
-            <p className="text-gray-600 text-lg">Last Renovation: <span className="text-teal">{property.lastRenovation}</span></p>
+            <h3 className="text-xl font-bold mb-2">Additional Details</h3>
+            <p>Listing Date: <span className="text-[var(--primary-color)]">{property.listingDate}</span></p>
+            <p>Last Renovation: <span className="text-[var(--primary-color)]">{property.lastRenovation}</span></p>
           </div>
           <div className="mb-4">
-            <h3 className="text-xl font-bold mb-2 font-display text-navy">Proposed Updates</h3>
+            <h3 className="text-xl font-bold mb-2">Proposed Updates</h3>
             {mockProposals.length > 0 ? (
-              <ul className="list-disc pl-5 text-gray-600">
+              <ul className="list-disc pl-5">
                 {mockProposals.map(proposal => (
                   <li key={proposal.id}>
                     {proposal.text} - Votes: 
-                    <span className="text-teal"> Vitalik: {proposal.votes['vitalik.eth']}, Elon: {proposal.votes['elonmusk.eth'] || 'N/A'}</span>
+                    <span className="text-[var(--primary-color)]"> Vitalik: {proposal.votes['vitalik.eth']}, Elon: {proposal.votes['elonmusk.eth'] || 'N/A'}</span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-gray-600">No proposals yet.</p>
+              <p>No proposals yet.</p>
             )}
           </div>
           <div className="mb-6">
-            <h3 className="text-xl font-bold mb-2 font-display text-navy">Propose an Update or Remodel</h3>
-            <p className="text-gray-600 mb-2">Have an idea to improve {property.name}? Suggest it below to vote with other owners!</p>
+            <h3 className="text-xl font-bold mb-2">Propose an Update or Remodel</h3>
+            <p className="mb-2">Have an idea to improve {property.name}? Suggest it below to vote with other owners!</p>
             <textarea
-              className="w-full p-2 border border-teal rounded-lg text-navy bg-white focus:outline-none focus:border-ochre"
+              className="w-full p-2 border border-[var(--secondary-color)] rounded-lg text-[var(--text-color)] bg-[var(--background-color)] focus:outline-none focus:border-[var(--accent-color)]"
               rows={4}
               value={proposal}
               onChange={(e) => setProposal(e.target.value)}
               placeholder="E.g., Add a rooftop deck, upgrade kitchen appliances..."
             />
-            <button onClick={submitProposal} className="mt-2 bg-ochre text-white px-6 py-2 rounded font-bold w-full sm:w-auto font-display hover:bg-teal">Submit for Voting</button>
+            <button onClick={submitProposal} className="mt-2 btn-primary w-full sm:w-auto">Submit for Voting</button>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/dashboard">
-              <button className="bg-teal text-white px-6 py-2 rounded w-full sm:w-auto font-display hover:bg-ochre">Back to Dashboard</button>
+              <button className="btn-secondary w-full sm:w-auto">Back to Dashboard</button>
             </Link>
           </div>
         </div>
