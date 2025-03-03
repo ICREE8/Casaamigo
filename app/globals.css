@@ -13,7 +13,7 @@
 body {
   background-color: var(--airbnb-white);
   color: var(--airbnb-charcoal);
-  font-family: 'Circular', 'Arial', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .card {
@@ -33,7 +33,7 @@ body {
   padding: 10px 20px;
   border-radius: 8px;
   font-weight: bold;
-  font-family: 'Circular', 'Arial', sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 .btn-primary:hover {
   background-color: #E00B41;
@@ -45,11 +45,19 @@ body {
   padding: 10px 20px;
   border-radius: 8px;
   font-weight: bold;
-  font-family: 'Circular', 'Arial', sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 .btn-secondary:hover {
   border-color: var(--airbnb-charcoal);
 }
 .text-muted {
   color: #717171;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 0.2; }
+}
+.animate-fade-in {
+  animation: fadeIn 2s ease-in-out forwards;
 }
